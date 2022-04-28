@@ -1,10 +1,11 @@
 import React from 'react';
 import Image from 'next/image';
-import { SearchIcon } from '@heroicons/react/outline';
+import { SearchIcon, PlusCircleIcon } from '@heroicons/react/outline';
+import { HomeIcon } from '@heroicons/react/solid';
 
 const Header = () => {
   return (
-    <div className="flex items-center justify-between max-w-6xl">
+    <div className="flex items-center justify-between max-w-6xl mx-4 xl:mx-auto">
       <div className="w-24 h-24 relative cursor-pointer hidden lg:inline-grid">
         <Image
           src="http://www.jennexplores.com/wp-content/uploads/2015/09/Instagram_logo_black.png"
@@ -31,8 +32,13 @@ const Header = () => {
         />
       </div>
 
-      <div>
-        <h2>Right Side</h2>
+      <div className="flex space-x-4 items-center">
+        <HomeIcon className="hidden md:inline-flex h-6 cursor-pointer hover:scale-125 transition-transform duration-200 ease-out" />
+        <PlusCircleIcon className="h-6 cursor-pointer hover:scale-125 transition-transform duration-200 ease-out" />
+
+        <button className="bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-700 text-white px-6 py-2 font-medium rounded-md hover:brightness-105 hover:shadow-md whitespace-nowrap">
+          Sign in
+        </button>
       </div>
     </div>
   );
