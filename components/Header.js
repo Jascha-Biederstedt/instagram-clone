@@ -2,8 +2,11 @@ import React from 'react';
 import Image from 'next/image';
 import { SearchIcon, PlusCircleIcon } from '@heroicons/react/outline';
 import { HomeIcon } from '@heroicons/react/solid';
+import { useSession, signIn, signOut } from 'next-auth/react';
 
 const Header = () => {
+  const { data: session } = useSession();
+
   return (
     <header className="shadow-sm border-b sticky top-0 bg-white z-30">
       <div className="flex items-center justify-between max-w-6xl mx-4 xl:mx-auto">
@@ -35,10 +38,25 @@ const Header = () => {
 
         <div className="flex space-x-4 items-center">
           <HomeIcon className="hidden md:inline-flex h-6 cursor-pointer hover:scale-125 transition-transform duration-200 ease-out" />
-          <PlusCircleIcon className="h-6 cursor-pointer hover:scale-125 transition-transform duration-200 ease-out" />
-          <button className="bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-700 text-white px-6 py-2 font-medium rounded-md hover:brightness-105 hover:shadow-md whitespace-nowrap">
-            Sign in
-          </button>
+          {session ? (
+            <>
+              <PlusCircleIcon className="h-6 cursor-pointer hover:scale-125 transition-transform duration-200 ease-out" />
+              <img
+                onClick={signOut}
+                src={session.user.image}
+                alt="User image"
+                referrerPolicy="no-referrer"
+                className="h-10 rounded-full cursor-pointer"
+              />
+            </>
+          ) : (
+            <button
+              onClick={signIn}
+              className="bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-700 text-white px-6 py-2 font-medium rounded-md hover:brightness-105 hover:shadow-md whitespace-nowrap"
+            >
+              Sign in
+            </button>
+          )}
         </div>
       </div>
     </header>
