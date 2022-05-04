@@ -5,6 +5,7 @@ import Stories from './Stories';
 import Posts from './Posts';
 import MiniProfile from './MiniProfile';
 import Suggestions from './Suggestions';
+import UploadModal from './UploadModal';
 
 const Feed = () => {
   const { data: session } = useSession();
@@ -28,6 +29,8 @@ const Feed = () => {
           <Suggestions />
         </div>
       </aside>
+
+      <UploadModal />
     </main>
   );
 };
