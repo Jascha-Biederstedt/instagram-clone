@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useRecoilState } from 'recoil';
 import Modal from 'react-modal';
 import { CameraIcon } from '@heroicons/react/outline';
@@ -8,6 +8,7 @@ import { modalState } from '../atom/modalAtom';
 const UploadModal = () => {
   const [open, setOpen] = useRecoilState(modalState);
   const [selectedFile, setSelectedFile] = useState(null);
+  const filePickerRef = useRef(null);
 
   return (
     <>
@@ -30,10 +31,13 @@ const UploadModal = () => {
                 className="w-full max-h-[250px] object-cover cursor-pointer"
               />
             ) : (
-              <CameraIcon className="cursor-pointer h-14 bg-red-200 p-2 rounded-full border-2 text-red-500" />
+              <CameraIcon
+                onClick={() => filePickerRef.current.click()}
+                className="cursor-pointer h-14 bg-red-200 p-2 rounded-full border-2 text-red-500"
+              />
             )}
 
-            <input type="file" hidden />
+            <input type="file" hidden ref={filePickerRef} />
             <input
               type="text"
               maxLength="150"
