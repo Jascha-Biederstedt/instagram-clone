@@ -8,7 +8,20 @@ import { modalState } from '../atom/modalAtom';
 const UploadModal = () => {
   const [open, setOpen] = useRecoilState(modalState);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [loading, setLoading] = useState(false);
   const filePickerRef = useRef(null);
+
+  const addImageToPost = event => {
+    const reader = new FileReader();
+
+    if (event.target.files[0]) {
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+    reader.onload = readerEvent => {
+      setSelectedFile(readerEvent.target.result);
+    };
+  };
 
   return (
     <>
@@ -27,7 +40,7 @@ const UploadModal = () => {
               <img
                 onClick={() => setSelectedFile(null)}
                 src={selectedFile}
-                alt=""
+                alt="Loaded user image"
                 className="w-full max-h-[250px] object-cover cursor-pointer"
               />
             ) : (
@@ -37,7 +50,12 @@ const UploadModal = () => {
               />
             )}
 
-            <input type="file" hidden ref={filePickerRef} />
+            <input
+              type="file"
+              hidden
+              ref={filePickerRef}
+              onChange={addImageToPost}
+            />
             <input
               type="text"
               maxLength="150"
