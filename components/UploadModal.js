@@ -106,7 +106,7 @@ const UploadModal = () => {
             <button
               disabled={!selectedFile || loading}
               onClick={uploadPost}
-              className="w-full bg-red-600 text-white p-2 shadow-md hover:brightness-125 disabled:bg-gray-200 disabled:cursor-not-allowed disabled:hover:brightness-100"
+              className="w-full bg-red-600 text-white p-2 shadow-md hover:brightness-110 disabled:bg-gray-200 disabled:cursor-not-allowed disabled:hover:brightness-100"
             >
               Upload Post
             </button>

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { SearchIcon, PlusCircleIcon } from '@heroicons/react/outline';
 import { HomeIcon } from '@heroicons/react/solid';
 import { useSession, signIn, signOut } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
 
 import { modalState } from '../atom/modalAtom';
@@ -10,6 +11,7 @@ import { modalState } from '../atom/modalAtom';
 const Header = () => {
   const { data: session } = useSession();
   const [open, setOpen] = useRecoilState(modalState);
+  const router = useRouter();
 
   return (
     <header className="shadow-sm border-b sticky top-0 bg-white z-30">
@@ -19,6 +21,7 @@ const Header = () => {
             src="http://www.jennexplores.com/wp-content/uploads/2015/09/Instagram_logo_black.png"
             layout="fill"
             className="object-contain"
+            onClick={() => router.push('/')}
           />
         </div>
         <div className="cursor-pointer h-24 w-10 relative lg:hidden">
@@ -26,6 +29,7 @@ const Header = () => {
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/800px-Instagram_logo_2016.svg.png"
             layout="fill"
             className="object-contain"
+            onClick={() => router.push('/')}
           />
         </div>
 
@@ -41,7 +45,10 @@ const Header = () => {
         </div>
 
         <div className="flex space-x-4 items-center">
-          <HomeIcon className="hidden md:inline-flex h-6 cursor-pointer hover:scale-125 transition-transform duration-200 ease-out" />
+          <HomeIcon
+            className="hidden md:inline-flex h-6 cursor-pointer hover:scale-125 transition-transform duration-200 ease-out"
+            onClick={() => router.push('/')}
+          />
           {session ? (
             <>
               <PlusCircleIcon
